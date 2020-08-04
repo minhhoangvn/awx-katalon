@@ -1,13 +1,11 @@
-- name: Hello World Sample
-  hosts: all
-  tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World Katalon_Job Role!"
-    - name: Get Cluster Info
-      command: kubectl cluster-info
-      register: kubectl
-    - name: Print Check Info
-      debug:
-        var: kubectl
-        verbosity: 3
+---
+- name: Hello Message
+  debug:
+    msg: "Hello World Katalon_Job Role!"
+- name: Get Cluster Info
+  command: kubectl cluster-info
+  register: kubectl
+- name: Print Check Info
+  debug:
+    var: kubectl
+    verbosity: 3

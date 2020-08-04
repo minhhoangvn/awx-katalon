@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: katalonstudio
+  namespace: {{ kubernetes_namespace }}
+  labels:
+    name: katalonstudio
+    app: katalonstudio
+spec: 
+  template:
+    spec:
+      containers:
+        - name: katalonstudio
+          image:  "katalonstudio/katalon:{{image_tag}}"
+          command:
+            - /bin/entrypoint.sh
+          volumeMounts:
+          - name: configmap-volume
+            mountPath: /bin/entrypoint.sh
+            readOnly: true
+            subPath: entrypoint.sh
+          - name: source
+            mountPath: /workspace
+      restartPolicy: OnFailure
+      volumes:
+        - name: configmap-volume
+          configMap:
+            defaultMode: 0700
+            name: katalonstudio-configmap
+        - name: source
+          emptyDir: {}  
+      initContainers:
+        - name: download
+          image: alpine:3.7
+          command: ["/bin/sh","-c"]
+          args: ['apk add --no-cache git && git clone {{automation_source_code}} /tmp/']
+          volumeMounts:
+            - mountPath: /tmp/
+              name:  source

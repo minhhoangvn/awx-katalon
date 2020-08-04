@@ -11,7 +11,7 @@
     verbosity: 3
 - name: Render Katalon Job Template
   set_fact:
-    "{{ item }}": "{{ lookup('templates', item + '.yml.j2') }}"
+    "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"
   with_items:
     - "config"
     - "job"

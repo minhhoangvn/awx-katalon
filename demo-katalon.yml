@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - debug
+    - katalon_job

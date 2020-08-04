@@ -9,3 +9,18 @@
   debug:
     var: kubectl
     verbosity: 3
+- name: Render Katalon Job Template
+  set_fact:
+    "{{ item }}": "{{ lookup('templates', item + '.yml.j2') }}"
+  with_items:
+    - "config"
+    - "job"
+  no_log: false
+- name: Print Katalon Config Template
+  debug:
+    var: config
+    verbosity: 3
+- name: Print Katalon Job Template
+  debug:
+    var: job
+    verbosity: 3

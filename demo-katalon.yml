@@ -1,13 +1,4 @@
 - name: Hello World Sample
   hosts: all
-  tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World!"
-    - name: Get Cluster Info
-      command: kubectl cluster-info
-      register: kubectl
-    - name: Print Check Info
-      debug:
-        var: kubectl
-        verbosity: 3 
+  roles:
+    - { role: debug }

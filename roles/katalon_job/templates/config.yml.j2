@@ -6,4 +6,4 @@ metadata:
 data:
   entrypoint.sh: |-
     #!/bin/bash
-    katalonc.sh -projectPath=/workspace -browserType="{{browser}}" -retry={{retry_number}} -statusDelay={{status_delay}} -testSuitePath="{{testsuite_path}}" -apikey="{{katalon_api_key}}"
+    katalonc.sh -projectPath={{project_path}} -browserType="{{browser}}" -retry={{retry_number}} -statusDelay={{status_delay}} -testSuitePath="{{testsuite_path}}" -apikey="{{katalon_api_key}}"

@@ -3,8 +3,8 @@
   hosts: all
   vars:
     ansible_python_interpreter: /usr/bin/python3
-  tasks:
-    - name: Use kubectl
+  pre_tasks:
+    - name: Set kubectl variable command
       set_fact:
         kubectl_cmd: "{{ 'kubectl' }}"
         cacheable: yes

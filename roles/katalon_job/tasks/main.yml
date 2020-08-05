@@ -26,7 +26,7 @@
     dest: /home/coe/jobs/ansible-job.yaml
 
 - name: Apply Katalon Job
-  shell: |
+  command: |
     echo {{ item | quote }} | {{ kubectl }} apply -f -
   with_items:
     - "{{ config }}"

@@ -1,6 +1,8 @@
 ---
 - name: Main Job Here
   hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   roles:
     - debug
     - katalon_job

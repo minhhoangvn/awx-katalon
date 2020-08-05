@@ -1,20 +1,4 @@
 ---
-- name: Hello Message
-  debug:
-    msg: "Hello World Katalon_Job Role!"
-
-# - name: Use kubectl
-#   set_fact:
-#     kubectl_cmd: "{{ 'kubectl' }}"
-
-- name: Render Katalon Job Template
-  set_fact:
-    "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"
-  with_items:
-    - "config"
-    - "job"
-  no_log: true
-
 - name: Create Katalon Config Job Template
   copy:
     content: "{{config }}"

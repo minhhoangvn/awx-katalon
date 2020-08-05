@@ -1,6 +1,0 @@
----
-- name: Hello Message
-  debug:
-    msg: "Hello World Debug Role!"
-- name: Get Cluster Info
-  command: kubectl cluster-info

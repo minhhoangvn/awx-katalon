@@ -8,6 +8,12 @@
       set_fact:
         kubectl_cmd: "{{ 'kubectl' }}"
         cacheable: yes
+    - name: Render Katalon Job Template
+      set_fact:
+        "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"
+      with_items:
+        - "config"
+        - "job"
+      no_log: true
   roles:
-    - debug
     - katalon_job

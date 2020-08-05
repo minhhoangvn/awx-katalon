@@ -16,14 +16,22 @@
     - "config"
     - "job"
   no_log: false
-- name: Apply Katalon Job
-  shell: |
-    echo {{ item | quote }} | {{ kubectl }} apply -f -
-  with_items:
-    - "{{ config }}"
-    - "{{ job }}"
-  no_log: false
+- name: Create Katalon Config Job Template
+  copy:
+    content: "{{config }}"
+    dest: /home/coe/jobs/ansible-config.yaml
+- name: Create Katalon Config Job Template
+  copy:
+    content: "{{job }}"
+    dest: /home/coe/jobs/ansible-job.yaml
+# - name: Apply Katalon Job
+#   shell: |
+#     echo {{ item | quote }} | {{ kubectl }} apply -f -
+#   with_items:
+#     - "{{ config }}"
+#     - "{{ job }}"
+#   no_log: false
 
-- name: Get Katalon Job Information
-  shell: kubectl describe pods
-  no_log: false
+# - name: Get Katalon Job Information
+#   shell: kubectl describe pods
+#   no_log: false

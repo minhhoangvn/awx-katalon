@@ -10,7 +10,7 @@
         cacheable: yes
     - name: Render Katalon Job Template
       set_fact:
-        "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"
+        "{{ item }}": "{{ lookup('template', 'roles/katalon_jobs/templates/' item + '.yml.j2') }}"
       with_items:
         - "config"
         - "job"

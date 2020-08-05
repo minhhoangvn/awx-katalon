@@ -5,7 +5,7 @@
 
 - name: Use kubectl
   set_fact:
-    kubectl: "{{ 'kubectl' }}"
+    kubectl_or_oc: "{{ 'kubectl' }}"
 
 - name: Render Katalon Job Template
   set_fact:
@@ -26,7 +26,8 @@
     dest: /home/coe/jobs/ansible-job.yaml
 
 - name: Apply Katalon Job
-  command: echo {{ item | quote }} |  {{ kubectl }} apply -f -
+  shell: |
+    echo {{ item | quote }} | {{ kubectl_or_oc }} apply -f -
   with_items:
     - "{{ config }}"
     - "{{ job }}"

@@ -3,10 +3,6 @@
   debug:
     msg: "Hello World Katalon_Job Role!"
 
-- name: Get Cluster Info
-  command: kubectl cluster-info
-  register: kubectllog
-
 - name: Render Katalon Job Template
   set_fact:
     "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"

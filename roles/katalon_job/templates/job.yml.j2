@@ -4,7 +4,7 @@ metadata:
   name: katalonstudio
   namespace: {{ kubernetes_namespace }}
   labels:
-    name: katalonstudio
+    name: {{job_name}}
     app: katalonstudio
 spec: 
   template:

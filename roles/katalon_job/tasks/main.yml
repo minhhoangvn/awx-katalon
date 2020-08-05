@@ -18,5 +18,14 @@
   no_log: false
 
 - name: Get Katalon Job Information
-  shell: kubectl describe pods
+  shell: kubectl describe pods -n {{kubernetes_namepsace}} | gsed -n '/^Containers/,/Conditions/p' | grep Reason | awk '{split($0,a," "); print a[2]}'
+  register: pod_state
   no_log: false
+
+- name: Get logs
+  shell: kubectl logs job/katalonstudio -n {{kubernetes_namespace}} | gsed -n '/<?xml/,/testsuites>/p' >> junit.xml
+  when: pod_state == "Completed"
+
+- name: Delete job & pod
+  shell kubectl delete job -l name={{job_name}} -n {{kubernetes_namespace}}
+  

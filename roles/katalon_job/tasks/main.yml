@@ -16,17 +16,14 @@
     - "config"
     - "job"
   no_log: false
-- name: Print Katalon Config Template
-  debug:
-    var: config
-    verbosity: 3
-- name: Print Katalon Job Template
-  debug:
-    var: job
-    verbosity: 3
-- name: Debug ansible_python_interpreter
-  debug:
-    var: ansible_python_interpreter
-- name: Debug ansible_python_version
-  debug:
-    var: ansible_python_version
+- name: Apply Katalon Job
+  shell: |
+    echo {{ item | quote }} | {{ kubectl }} apply -f -
+  with_items:
+    - "{{ config }}"
+    - "{{ job }}"
+  no_log: false
+
+- name: Get Katalon Job Information
+  shell: kubectl describe pods
+  no_log: false

@@ -5,7 +5,7 @@
 
 - name: Get Cluster Info
   command: kubectl cluster-info
-  register: kubectl
+  register: kubectllog
 
 - name: Render Katalon Job Template
   set_fact:

@@ -3,6 +3,10 @@
   debug:
     msg: "Hello World Katalon_Job Role!"
 
+- name: Use kubectl
+  set_fact:
+    kubectl: "{{ 'kubectl' }}"
+
 - name: Render Katalon Job Template
   set_fact:
     "{{ item }}": "{{ lookup('template', item + '.yml.j2') }}"
@@ -22,7 +26,7 @@
     dest: /home/coe/jobs/ansible-job.yaml
 
 - name: Apply Katalon Job
-  command: echo {{ item | quote }} |  kubectl apply -f -
+  command: echo {{ item | quote }} |  {{ kubectl }} apply -f -
   with_items:
     - "{{ config }}"
     - "{{ job }}"

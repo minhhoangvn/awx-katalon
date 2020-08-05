@@ -3,9 +3,9 @@
   debug:
     msg: "Hello World Katalon_Job Role!"
 
-- name: Use kubectl
-  set_fact:
-    kubectl_or_oc: "{{ 'kubectl' }}"
+# - name: Use kubectl
+#   set_fact:
+#     kubectl_cmd: "{{ 'kubectl' }}"
 
 - name: Render Katalon Job Template
   set_fact:
@@ -27,7 +27,7 @@
 
 - name: Apply Katalon Job
   shell: |
-    echo {{ item | quote }} | {{ kubectl_or_oc }} apply -f -
+    echo {{ item | quote }} | {{ kubectl_cmd }} apply -f -
   with_items:
     - "{{ config }}"
     - "{{ job }}"

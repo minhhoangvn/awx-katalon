@@ -3,6 +3,10 @@
   hosts: all
   vars:
     ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Use kubectl
+      set_fact:
+        kubectl_cmd: "{{ 'kubectl' }}"
   roles:
     - debug
     - katalon_job

@@ -18,7 +18,7 @@
   no_log: false
 
 - name: Get Katalon Job Information
-  shell: kubectl describe pods -n {{kubernetes_namepsace}} | gsed -n '/^Containers/,/Conditions/p' | grep Reason | awk '{split($0,a," "); print a[2]}'
+  shell: kubectl describe pods -n {{kubernetes_namespace}} | gsed -n '/^Containers/,/Conditions/p' | grep Reason | awk '{split($0,a," "); print a[2]}'
   register: pod_state
   no_log: false
 

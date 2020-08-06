@@ -20,6 +20,8 @@
 - name: Get Katalon Job Information
   shell: kubectl describe pods -n {{ kubernetes_namespace }} | sed -n '/^Containers/,/Conditions/p' | grep Reason | awk '{split($0,a," "); print a[2]}'
   register: pod_state
+  debug:
+    msg: Pod status is {{ pod_state }}
   until: pod_state == "Completed"
   retries: 3
   delay: 60

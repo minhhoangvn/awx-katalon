@@ -6,4 +6,6 @@ metadata:
 data:
   entrypoint.sh: |-
     #!/bin/bash
-    katalonc.sh -projectPath={{project_path}} -browserType="{{browser}}" -retry={{retry_number}} -statusDelay={{status_delay}} -testSuitePath="{{testsuite_path}}" -apikey="{{katalon_api_key}}"
+    katalonc.sh -projectPath={{project_path}} -browserType="{{browser}}" -retry={{retry_number}} -statusDelay={{status_delay}} -testSuitePath="{{testsuite_path}}" -apikey="{{katalon_api_key}}" >> logs.txt
+    rootDir=$(cat logs.txt | grep 'JUnit report were generated at folder:' | awk '{split($0,a,": "); print a[2]}')
+    cat $rootDir/JUnit_Report.xml

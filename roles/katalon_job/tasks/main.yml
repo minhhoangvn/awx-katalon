@@ -20,12 +20,14 @@
 - name: Get Katalon Job Information
   shell: kubectl describe pods -n {{ kubernetes_namespace }} | sed -n '/^Containers/,/Conditions/p' | grep Reason | awk '{split($0,a," "); print a[2]}'
   register: pod_state
+  #until: pod_state == "Completed"
+  #retries: 3
+  #delay: 60
+  #no_log: false
+
+- name: DEBUG
   debug:
     msg: Pod status is {{ pod_state }}
-  until: pod_state == "Completed"
-  retries: 3
-  delay: 60
-  no_log: false
 
 - name: Get logs
   shell: kubectl logs job/katalonstudio -n {{ kubernetes_namespace }} | sed -n '/<?xml/,/testsuites>/p' >> junit.xml

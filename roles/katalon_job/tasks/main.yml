@@ -27,5 +27,5 @@
   when: pod_state == "Completed"
 
 - name: Delete job & pod
-  shell kubectl delete job -l name={{job_name}} -n {{kubernetes_namespace}}
+  shell: kubectl delete job -l name={{job_name}} -n {{kubernetes_namespace}}
   

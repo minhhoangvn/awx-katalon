@@ -1,0 +1,5 @@
+---
+- name: Create new issue
+  host: all
+  roles:
+      - jira

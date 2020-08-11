@@ -1,0 +1,10 @@
+---
+- name: Fetch IP from deployed machine
+  shell: kubectl describe pod -n katalon | grep IP | awk '{split($0, a, ":"); print a[2]}' | tr -d " "
+  register: pod_ip
+
+- name: Example playbook to deploy a new test machine
+  copy:
+      content: "deployed_ip: {{ pod_ip }}"
+      dest: /tmp/ip_list.yml
+      follow: yes   # Overwrite the dest file

@@ -1,4 +1,13 @@
 ---
+- name: Fetch new ip
+  host: all
+  tasks:
+      - include_vars:
+          file: '/tmp/ip_list.yml'
+          name: ips
+      - debug:
+          var: ips.deployed_ip
+
 - name: Main Job Here
   hosts: all
   vars:

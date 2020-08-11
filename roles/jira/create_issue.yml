@@ -1,0 +1,12 @@
+- name: Create issue
+  jira:
+    uri: '{{ server }}'
+    username: '{{ jira_user }}'
+    password: '{{ jira_pass }}'
+    project: KwA
+    operation: create
+    summary: Katalon fail with error (fill something here)
+    description: created via awx workflow
+    issuetype: Bug
+  register: issue
+

@@ -1,17 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: katalonstudio
+  name: {{ job_name }}
   namespace: {{ kubernetes_namespace }}
   labels:
-    name: {{job_name}}
+    name: {{ job_name }}
     app: katalonstudio
 spec: 
   template:
     spec:
       containers:
         - name: katalonstudio
-          image:  "katalonstudio/katalon:{{image_tag}}"
+          image:  "katalonstudio/katalon:{{ image_tag }}"
           command:
             - /bin/entrypoint.sh
           volumeMounts:
@@ -33,7 +33,7 @@ spec:
         - name: download
           image: alpine:3.7
           command: ["/bin/sh","-c"]
-          args: ['apk add --no-cache git && git clone {{automation_source_code}} /tmp/']
+          args: ['apk add --no-cache git && git clone {{ automation_source_code }} /tmp/']
           volumeMounts:
             - mountPath: /tmp/
               name:  source

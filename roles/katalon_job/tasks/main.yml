@@ -25,12 +25,8 @@
   delay: 60
   no_log: false
 
-- name: DEBUG
-  debug:
-    msg: Pod status is {{ pod_state.stdout }}
+- name: Get logs to file
+  shell: kubectl logs job/katalonstudio -n {{ kubernetes_namespace }} | sed -n '/<?xml/,/testsuites>/p' > junit.xml
 
-- name: Get logs
-  shell: kubectl logs job/katalonstudio -n {{ kubernetes_namespace }} | sed -n '/<?xml/,/testsuites>/p' >> junit.xml
-
-#- name: Delete job & pod
-#  shell: kubectl delete job -l name={{ job_name }} -n {{ kubernetes_namespace }}
+- name: Delete job & pod
+  shell: kubectl delete job -l name={{ job_name }} -n {{ kubernetes_namespace }}

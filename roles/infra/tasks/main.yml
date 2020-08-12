@@ -1,2 +1,2 @@
 ---
-- import_playbook: create_qa_env.yml
+- include: create_qa_env.yml

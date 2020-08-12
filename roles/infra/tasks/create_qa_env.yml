@@ -5,6 +5,6 @@
 
 - name: Example playbook to deploy a new test machine
   copy:
-      content: "deployed_ip: {{ pod_ip }}"
+      content: "deployed_ip: {{ pod_ip.stdout }}"
       dest: /tmp/ip_list.yml
       follow: yes   # Overwrite the dest file

@@ -1,9 +1,13 @@
 ---
-- name: Fetch new ip
+- name: Get new ip
   hosts: all
   tasks:
+      - name: Fetch IP from remote file
+        fetch:
+          src: /tmp/ip_list.yml
+          dest: /tmp/ip_list.yml
       - include_vars:
-          file: '/tmp/ip_list.yml'
+          file: /tmp/ip_list.yml
           name: ips
       - debug:
           var: ips.deployed_ip

@@ -1,5 +1,5 @@
 ---
 - name: Example of a setup step create a machine then assign the IP
-  hosts: kubecluster
+  hosts: all
   roles:
       - infra

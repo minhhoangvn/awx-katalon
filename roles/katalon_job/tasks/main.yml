@@ -31,7 +31,7 @@
 - name: Extract stack trace for notification - Root cause + 9 lines below
   shell: |
       firstline=$(kubectl logs job/{{ job_name }} -n {{ kubernetes_namespace }} | grep -n '\[TEST_STEP\]\[FAILED\]' | cut -d : -f1)
-      kubectl logs job/katalonstudio -n {{ kubernetes_namespace  }} | sed -n $firstline,$(($firstline+9))p
+      kubectl logs job/{{ job_name }} -n {{ kubernetes_namespace  }} | sed -n $firstline,$(($firstline+9))p
   register: stack_trace
 
 - name: Write stack trace to file

@@ -1,6 +1,6 @@
 ---
 - name: Fetch new ip
-  host: all
+  hosts: all
   tasks:
       - include_vars:
           file: '/tmp/ip_list.yml'

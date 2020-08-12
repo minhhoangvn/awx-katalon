@@ -1,0 +1,5 @@
+---
+- name: Send a message to slack channel when build failed
+  hosts: all
+  roles:
+      - slack

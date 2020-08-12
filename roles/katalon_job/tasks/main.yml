@@ -28,5 +28,17 @@
 - name: Get logs to file
   shell: kubectl logs job/katalonstudio -n {{ kubernetes_namespace }} | sed -n '/<?xml/,/testsuites>/p' > junit.xml
 
+- name: Extract stack trace for notification
+  shell: |
+      firstline=$(cat sample.txt | grep -n '\[TEST_STEP\]\[FAILED\]' | cut -d : -f1)
+      kubectl logs job/katalonstudio -n {{ kubernetes_namespace  }} | sed -n $firstline,81p
+  register: stack_trace
+
+- name: Write stack trace to file
+  copy:
+      content: "{{ stack_trace.stdout }}"
+      dest: /tmp/stack_trace.txt
+      follow: yes
+
 - name: Delete job & pod
   shell: kubectl delete job -l name={{ job_name }} -n {{ kubernetes_namespace }}

@@ -1,0 +1,10 @@
+- name: Fetch the logs on remote host
+  shell: cat /tmp/stack_trace.txt
+  register: stacks
+
+- name: Send notification on failed
+  slack:
+      token: "TLCBGS430/B018NGL4HGD/kDRWj89WQI6PHgzAJZ2YQme4"
+      msg: "{{ stacks.stdout }}"
+      channel: '#testbot'
+      username: 'Awx report with furious'

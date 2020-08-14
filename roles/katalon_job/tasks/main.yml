@@ -39,6 +39,15 @@
       content: "{{ stack_trace.stdout }}"
       dest: /tmp/stack_trace.txt
       follow: yes
-
-- name: Delete job & pod
-  shell: kubectl delete job -l name={{ job_name }} -n {{ kubernetes_namespace }}
+- name: Delete completed job
+  include_role:
+      name: util
+      tasks_from: delete_job.yml
+      vars:
+          job_name: "{{ job_name }}"
+          kubernetes_namespace: "{{ kubernetes_namespace }}"
+      #- name: Delete completed job
+      #  include_role: util
+      #  varsncl:
+      #      ncljob_name: "{{ job_name }}"
+      #      nclkubernetes_namespace: "{{ kubernetes_namespace }}"

@@ -1,0 +1,4 @@
+---
+- name: Send file to remote system
+  command: scp {{ file_name }} {{ remote_user }}:{{ remote_pass }}@{{ remote_host }}:{{ remote_location }}
+  changed_when: false

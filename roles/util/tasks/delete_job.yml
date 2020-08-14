@@ -1,0 +1,4 @@
+---
+- name: Delete job & pod
+  command: kubectl delete job -l name={{ job_name }} -n {{ kubernetes_namespace }}
+  changed_when: false
